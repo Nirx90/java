@@ -1,63 +1,55 @@
 class Node{
-    Node left;
-    Node right;
-    int val;
-    Node(int val){
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
+	int val;
+	Node left;
+	Node right;
+	Node(int val){
+		this.val = val;
+		this.left = null;
+		this.right = null;
+	}
 }
+
 public class tree {
-    Node root;
-    tree(){
-        this.root = null;
-    }
-     void insert(int val){
-        callInsert(root,val);
-    }
-    void callInsert(Node temp,int val){
-        if(root == null){
-            root = new Node(val);
-            return;
+	Node root;
+	tree(){
+		this.root = null;
+	}
+	
+	void insert(int val){
+		callInsert(root, val);
+	}
+	public Node callInsert(Node refroot,int val) {
+		if(refroot == null){
+            return new Node(val);
         }
-        if (val<temp.val){
-            if(temp.left != null){
-                callInsert(temp.left, val);
-            }
-            else{
-                temp.left = new Node(val);
-            }
+        if(val < refroot.val){
+            refroot.left = callInsert(refroot.left, val);
         }
-        if (val>temp.val){
-            if(temp.right != null){
-                callInsert(temp.right, val);
-            }
-            else{
-                temp.right = new Node(val);
-            }
+        if(val > refroot.val){
+            refroot.right = callInsert(refroot.right, val);
         }
-        
-    }
-    
-    void InOrder(){
-        callInOrder(root);
-    }
-    void callInOrder(Node temp){
-        if(temp.left != null){
-            callInOrder(temp.left);
-        }
-        System.err.print(temp.val+" ");
-        if(temp.right != null){
-            callInOrder(temp.right);
-        }
-    }
-    public static void main(String[] args) {
-        tree tr = new tree();
-        tr.insert(25);
-        tr.insert(21);
-        tr.insert(52);
-        tr.InOrder();
-        
-    }
+        return refroot;
+	}
+
+	void inOrder(){
+		callinorder(root);
+	}
+	void callinorder(Node refroot){
+		if (refroot != null){
+			callinorder(refroot.left);
+			System.out.println(refroot.val+" ");
+			callinorder(refroot.right);
+		}
+	}
+	public static void main(String[] args) {
+
+			tree tr = new tree();
+			tr.insert(14);
+			tr.insert(45);
+			tr.insert(77);
+			tr.insert(23);
+			tr.insert(45);
+			tr.inOrder();
+	}
+
 }
